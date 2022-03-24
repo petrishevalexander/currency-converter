@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import { CurrencyForm } from "./components/CurrencyForm";
+import axios from "axios";
 
 function App() {
+  const [appState, setAppState] = useState({});
+
+  // const [amountFrom, setAmountFrom] = useState("10");
+  // const [currencyFrom, setCurrencyFrom] = useState("USD");
+
+  // const [amountTo, setAmountTo] = useState("10");
+  // const [currencyTo, setCurrencyTo] = useState("RUB");
+
+  useEffect(() => {
+    const uri =
+      "http://api.currencylayer.com/live?access_key=0ab655dc60a67dcf3f5cc380c7a31b94";
+    axios.get(uri).then((responce) => {
+      setAppState(responce.data.quotes);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CurrencyForm currencies={appState} />
+      <CurrencyForm currencies={appState} />
     </div>
   );
 }
