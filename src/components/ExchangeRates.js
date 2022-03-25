@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExchangeRateFromBlock } from "./ExchangeRateFromBlock";
 import { ExchangeRateToBlock } from "./ExchangeRateToBlock";
 
 export const ExchangeRates = ({ data }) => {
-  const convertObjDataToArray = (data) => {
+  console.log(data);
+
+  useEffect(() => {
     const array = [];
     for (let key in data) {
       array.push({ currency: key, amount: data[key] });
     }
-    return array;
-  };
+    setRate(array);
+  }, [data]);
+
   const [amountFrom, setAmountFrom] = useState("1");
   const [currencyFrom, setCurrencyFrom] = useState("USD");
-  const [rate, setRate] = useState(convertObjDataToArray(data));
+  const [rate, setRate] = useState([]);
+
   const currencyNames = Object.keys(data);
 
   function updateArray(amountFrom, currencyFrom) {

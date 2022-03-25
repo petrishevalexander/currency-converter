@@ -11,8 +11,6 @@ export const ExchangeRateFromBlock = ({
     <>
       <input
         type="number"
-        // placeholder={placeholder}
-        // disabled={disabled}
         value={amount}
         onChange={(event) => onChangeAmount(event.target.value)}
       />
