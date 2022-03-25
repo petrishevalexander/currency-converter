@@ -1,31 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CurrencyForm } from "./CurrencyForm";
-import axios from "axios";
 
-export const Converter = () => {
-  const [data, setData] = useState({});
-
+export const Converter = ({ data }) => {
   const [amountFrom, setAmountFrom] = useState("");
   const [currencyFrom, setCurrencyFrom] = useState("USD");
 
   const [amountTo, setAmountTo] = useState("");
   const [currencyTo, setCurrencyTo] = useState("RUB");
 
-  useEffect(() => {
-    const uri =
-      "http://api.currencylayer.com/live?access_key=0ab655dc60a67dcf3f5cc380c7a31b94";
-    axios.get(uri).then((response) => {
-      const data = response.data.quotes;
-      const correctData = {};
-      for (let key in data) {
-        if (key === "USDRUB" || key === "USDUSD" || key === "USDEUR") {
-          const newKey = key.slice(3);
-          correctData[newKey] = data[key];
-        }
-      }
-      setData(correctData);
-    });
-  }, []);
   const currencyNames = Object.keys(data);
 
   function amountFromChangeHandler(newAmountFrom) {
