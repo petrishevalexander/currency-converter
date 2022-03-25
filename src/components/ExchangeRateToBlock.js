@@ -11,8 +11,8 @@ export const ExchangeRateToBlock = ({ rate }) => {
     );
   });
   return (
-    <>
-      <Table striped bordered hover>
+    <div>
+      <Table striped bordered hover className="mr-2">
         <thead>
           <tr>
             <th>Currency</th>
@@ -21,6 +21,6 @@ export const ExchangeRateToBlock = ({ rate }) => {
         </thead>
         <tbody>{res}</tbody>
       </Table>
-    </>
+    </div>
   );
 };

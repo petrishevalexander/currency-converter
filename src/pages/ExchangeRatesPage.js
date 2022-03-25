@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { ExchangeRateFromBlock } from "./ExchangeRateFromBlock";
-import { ExchangeRateToBlock } from "./ExchangeRateToBlock";
+import { ExchangeRateFromBlock } from "../components/ExchangeRateFromBlock";
+import { ExchangeRateToBlock } from "../components/ExchangeRateToBlock";
 
-export const ExchangeRates = ({ data }) => {
-  console.log(data);
-
+export const ExchangeRatesPage = ({ data }) => {
   useEffect(() => {
     const array = [];
     for (let key in data) {
       array.push({ currency: key, amount: data[key] });
     }
     setRate(array);
+    setCustomRate(array);
   }, [data]);
 
   const [amountFrom, setAmountFrom] = useState("1");
   const [currencyFrom, setCurrencyFrom] = useState("USD");
   const [rate, setRate] = useState([]);
-
+  const [customRate, setCustomRate] = useState([]);
   const currencyNames = Object.keys(data);
 
   function updateArray(amountFrom, currencyFrom) {
@@ -27,7 +26,7 @@ export const ExchangeRates = ({ data }) => {
         amount: ((amountFrom * item.amount) / itemFrom.amount).toFixed(4),
       };
     });
-    setRate(newRate);
+    setCustomRate(newRate);
   }
 
   function onChangeAmount(newAmountFrom) {
@@ -41,14 +40,17 @@ export const ExchangeRates = ({ data }) => {
   }
   return (
     <div>
-      <ExchangeRateFromBlock
-        currencyNames={currencyNames}
-        amount={amountFrom}
-        currency={currencyFrom}
-        onChangeAmount={onChangeAmount}
-        onChangeCurrancy={onChangeCurrancy}
-      />
-      <ExchangeRateToBlock rate={rate} />
+      <h1 className="text-center mt-1">Exchange Rates</h1>
+      <div className="text-center mt-1">
+        <ExchangeRateFromBlock
+          currencyNames={currencyNames}
+          amount={amountFrom}
+          currency={currencyFrom}
+          onChangeAmount={onChangeAmount}
+          onChangeCurrancy={onChangeCurrancy}
+        />
+        <ExchangeRateToBlock rate={customRate} />
+      </div>
     </div>
   );
 };

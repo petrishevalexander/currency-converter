@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Converter } from "./components/Converter";
-import { ExchangeRates } from "./components/ExchangeRates";
+import { ConverterPage } from "./pages/ConverterPage";
+import { ExchangeRatesPage } from "./pages/ExchangeRatesPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navigation } from "./components/Navigation";
 import { useEffect, useState } from "react";
@@ -37,8 +37,8 @@ function App() {
     <>
       <Navigation />
       <Routes>
-        <Route path="/" element={<Converter data={data} />} />
-        <Route path="/rates" element={<ExchangeRates data={data} />} />
+        <Route path="/" element={<ConverterPage data={data} />} />
+        <Route path="/rates" element={<ExchangeRatesPage data={data} />} />
       </Routes>
     </>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { CurrencyForm } from "./CurrencyForm";
+import { CurrencyForm } from "../components/CurrencyForm";
 
-export const Converter = ({ data }) => {
+export const ConverterPage = ({ data }) => {
   const [amountFrom, setAmountFrom] = useState("");
   const [currencyFrom, setCurrencyFrom] = useState("USD");
 
@@ -39,9 +39,9 @@ export const Converter = ({ data }) => {
   }
 
   return (
-    <div className="">
-      <h1 className="">Currency Converter</h1>
-      <div className="">
+    <div>
+      <h1 className="text-center mt-1">Currency Converter</h1>
+      <div>
         <CurrencyForm
           currencyNames={currencyNames}
           amount={amountFrom}
